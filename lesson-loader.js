@@ -135,3 +135,39 @@ return true;
 
 };
 
+/* ==========================================================
+   LOAD LESSON FROM JSON
+========================================================== */
+
+PPE.Lesson.load = function(data){
+
+    if(!data){
+        return false;
+    }
+
+    PPE.Lesson.cache.currentData = data;
+
+    PPE.Lesson.cache.topics =
+        data.topics || [];
+
+    PPE.Lesson.cache.lessons =
+        data.lessons || [];
+
+    PPE.Lesson.cache.paragraphs =
+        data.paragraphs || [];
+
+    PPE.Lesson.state.currentTopic =
+        data.topic || null;
+
+    PPE.Lesson.state.currentLesson =
+        data.lesson || null;
+
+    PPE.Lesson.state.currentParagraph = 0;
+    PPE.Lesson.state.currentSentence = 0;
+
+    PPE.Lesson.runtime.lastUpdate =
+        Date.now();
+
+    return true;
+
+};
