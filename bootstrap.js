@@ -120,6 +120,19 @@ if(
     typeof PPE.Storage.initialize==="function"
 ){
     PPE.Storage.initialize();
+    
+}
+
+if(
+
+PPE.Lesson &&
+
+typeof PPE.Lesson.initialize==="function"
+
+){
+
+PPE.Lesson.initialize();
+
 }
 
 if(
