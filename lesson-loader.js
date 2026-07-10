@@ -71,7 +71,15 @@ PPE.Lesson.runtime={
 
 package:"PPE-013",
 
-version:"1.0.0-alpha.1"
+version:"1.0.0-alpha.1",
+
+loadingStart:null,
+
+loadingFinish:null,
+
+renderTime:0,
+
+lastUpdate:null
 
 };
 
