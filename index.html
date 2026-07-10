@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color"
+content="#07111f">
+
+<title>Polyglot Presentation Engine</title>
+
+<style>
+
+/* ==========================================================
+POLYGLOT PRESENTATION ENGINE
+Version : 1.0.0 Alpha
+Module  : Foundation
+========================================================== */
+
+:root{
+
+--bg:#07111f;
+
+--panel:#101b2e;
+
+--panel2:#16253e;
+
+--panel3:#1d3152;
+
+--primary:#32d9ff;
+
+--primary2:#00bfff;
+
+--success:#18d26e;
+
+--warning:#ffcc00;
+
+--danger:#ff4d67;
+
+--text:#ffffff;
+
+--text2:#9fb5d8;
+
+--border:rgba(50,217,255,.18);
+
+--shadow:0 0 20px rgba(50,217,255,.18);
+
+--radius:18px;
+
+--headerHeight:56px;
+
+--statusHeight:36px;
+
+--toolbarHeight:64px;
+
+--progressHeight:3px;
+
+}
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+-webkit-tap-highlight-color:
+transparent;
+
+}
+
+html{
+
+width:100%;
+
+height:100%;
+
+overflow:hidden;
+
+}
+
+body{
+
+width:100%;
+
+height:100%;
+
+overflow:hidden;
+
+background:var(--bg);
+
+color:var(--text);
+
+}
+
+#app{
+
+width:100%;
+
+height:100%;
+
+display:flex;
+
+flex-direction:column;
+
+background:
+linear-gradient(
+180deg,
+#07111f 0%,
+#0d1b30 100%
+);
+
+}
+
+/* ==========================================================
+HEADER
+========================================================== */
+
+header{
+
+height:var(--headerHeight);
+
+background:rgba(16,27,46,.94);
+
+backdrop-filter:blur(16px);
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding-left:18px;
+
+padding-right:18px;
+
+border-bottom:1px solid var(--border);
+
+}
+
+.headerLeft{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+.headerRight{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.iconButton{
+
+width:38px;
+
+height:38px;
+
+border-radius:12px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:var(--panel2);
+
+border:1px solid var(--border);
+
+cursor:pointer;
+
+transition:.25s;
+
+user-select:none;
+
+}
+
+.iconButton:active{
+
+transform:scale(.95);
+
+}
+
+#topicTitle{
+
+font-size:18px;
+
+font-weight:bold;
+
+letter-spacing:.5px;
+
+color:white;
+
+}
+
+/* ==========================================================
+WORKSPACE
+========================================================== */
+
+main{
+
+flex:1;
+
+padding:5px;
+
+overflow:hidden;
+
+display:flex;
+
+justify-content:center;
+
+align-items:stretch;
+
+}
+
+#presentation{
+
+width:100%;
+
+max-width:900px;
+
+display:flex;
+
+flex-direction:column;
+
+background:rgba(16,27,46,.82);
+
+backdrop-filter:blur(12px);
+
+border-radius:22px;
+
+border:1px solid var(--border);
+
+box-shadow:var(--shadow);
+
+padding:14px;
+
+overflow:hidden;
+
+}
+
+#ppeContent{
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+
+overflow-y:auto;
+
+padding:8px 4px 20px;
+
+}
+
+.ppeParagraph{
+
+font-size:32px;
+
+line-height:2;
+
+color:#dce8ff;
+
+padding:22px;
+
+margin-bottom:18px;
+
+border-radius:18px;
+
+transition:.30s;
+
+cursor:pointer;
+
+min-height:110px;
+
+}
+
+.ppeParagraph:hover{
+
+background:rgba(50,217,255,.10);
+
+}
+
+.ppeParagraph.active{
+
+background:rgba(50,217,255,.18);
+
+border-left:5px solid #32d9ff;
+
+color:white;
+
+box-shadow:0 0 20px rgba(50,217,255,.25);
+
+}
+
+/* ==========================================================
+STATUS BAR
+========================================================== */
+
+#status{
+
+height:var(--statusHeight);
+
+background:rgba(16,27,46,.94);
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-around;
+
+border-top:1px solid var(--border);
+
+color:var(--text2);
+
+font-size:13px;
+
+}
+
+.statusItem{
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+}
+
+/* ==========================================================
+TOOLBAR
+========================================================== */
+
+#toolbar{
+
+height:var(--toolbarHeight);
+
+background:rgba(16,27,46,.96);
+
+display:grid;
+
+grid-template-columns:repeat(7,1fr);
+
+gap:6px;
+
+padding:8px;
+
+border-top:1px solid var(--border);
+
+}
+
+.toolButton{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:var(--panel2);
+
+border:1px solid var(--border);
+
+border-radius:10px;
+
+font-size:15px;
+
+height:44px;
+
+min-height:44px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.25s;
+
+user-select:none;
+
+}
+
+.toolButton:active{
+
+transform:scale(.95);
+
+}
+
+.toolButton:hover{
+
+background:var(--primary);
+
+color:#000;
+
+box-shadow:0 0 18px rgba(50,217,255,.55);
+
+}
+
+/* ==========================================================
+PROGRESS
+========================================================== */
+
+#progress{
+
+height:var(--progressHeight);
+
+background:#17263c;
+
+overflow:hidden;
+
+}
+
+#progressFill{
+
+width:0%;
+
+height:100%;
+
+background:linear-gradient(
+
+90deg,
+
+#32d9ff,
+
+#6ff5ff
+
+);
+
+transition:.25s;
+
+}
+
+/* ==========================================================
+OVERLAY
+========================================================== */
+
+#overlay{
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+background:rgba(0,0,0,.65);
+
+backdrop-filter:blur(6px);
+
+z-index:9999;
+
+}
+
+#overlayCard{
+
+width:320px;
+
+padding:28px;
+
+background:var(--panel);
+
+border-radius:20px;
+
+border:1px solid var(--border);
+
+text-align:center;
+
+box-shadow:var(--shadow);
+
+}
+
+#overlayTitle{
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-bottom:12px;
+
+}
+
+#overlayMessage{
+
+font-size:15px;
+
+color:var(--text2);
+
+line-height:1.6;
+
+}
+
+/* ==========================================================
+SCROLLBAR
+========================================================== */
+
+#presentation::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+#presentation::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+#presentation::-webkit-scrollbar-thumb{
+
+background:rgba(50,217,255,.35);
+
+border-radius:20px;
+
+}
+
+/* ==========================================================
+RESPONSIVE
+========================================================== */
+
+@media(max-width:768px){
+
+.ppeParagraph{
+
+font-size:24px;
+
+line-height:1.8;
+
+}
+
+#toolbar{
+
+grid-template-columns:repeat(4,1fr);
+
+grid-auto-rows:52px;
+
+height:auto;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.ppeParagraph{
+
+font-size:20px;
+
+}
+
+#topicTitle{
+
+font-size:16px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="app">
+
+<header>
+
+<div class="headerLeft">
+
+<div class="iconButton">←</div>
+
+<div id="topicTitle">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="headerRight">
+
+<div class="iconButton">★</div>
+
+<div class="iconButton">⚙</div>
+
+<div class="iconButton">⛶</div>
+
+</div>
+
+</header>
+
+<main>
+
+<div id="presentation">
+
+<div id="ppeContent">
+
+</div>
+
+</div>
+
+</main>
+
+<div id="status">
+
+<div class="statusItem">
+
+Paragraph 1/12
+
+</div>
+
+<div class="statusItem">
+
+00:00
+
+</div>
+
+<div class="statusItem">
+
+1.0x
+
+</div>
+
+</div>
+
+<nav id="toolbar">
+
+<div class="toolButton" id="btnPrevious">⏮</div>
+
+<div class="toolButton" id="btnPlay">▶</div>
+
+<div class="toolButton" id="btnPause">⏸</div>
+
+<div class="toolButton" id="btnNext">⏭</div>
+
+<div class="toolButton" id="btnSpeed">1.0x</div>
+
+<div class="toolButton" id="btnTheme">☀</div>
+
+<div class="toolButton" id="btnFont">Aa</div>
+
+</nav>
+
+<div id="progress">
+    <div id="progressFill"></div>
+</div>
+<div id="overlay">
+
+    <div id="overlayCard">
+
+        <div id="overlayTitle">
+            Loading...
+        </div>
+
+        <div id="overlayMessage">
+            Please wait...
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     PPE CORE
+========================================================== -->
+<script src="constants.js"></script>
+<script src="config.js"></script>
+
+<!-- ==========================================================
+     PPE FOUNDATION
+========================================================== -->
+<script src="engine-base.js"></script>
+<script src="system.js"></script>
+<script src="util.js"></script>
+<script src="logger.js"></script>
+<script src="event.js"></script>
+<script src="performance.js"></script>
+<script src="dependency-manager.js"></script>
+<script src="integration.js"></script>
+<script src="recovery.js"></script>
+
+<!-- ==========================================================
+     PPE UI ENGINE
+========================================================== -->
+<script src="renderer.js"></script>
+<script src="theme.js"></script>
+<script src="fullscreen.js"></script>
+<script src="toolbar.js"></script>
+<script src="progress.js"></script>
+<script src="teleprompter.js"></script>
+
+<!-- ==========================================================
+     PPE DATA ENGINE
+========================================================== -->
+<script src="storage.js"></script>
+<script src="bridge.js"></script>
+<script src="ai.js"></script>
+<script src="analysis.js"></script>
+
+<!-- ==========================================================
+     PPE SYSTEM
+========================================================== -->
+<script src="certification.js"></script>
+<script src="bootstrap.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+
+    PPE.Bootstrap.load();
+
+});
+</script>
+
+</body>
+</html>
