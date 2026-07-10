@@ -49,11 +49,17 @@ totalSentence:0
    CACHE
 ========================================================== */
 
-PPE.Lesson.cache={
+PPE.Lesson.cache = {
 
-topics:[],
+    topics: [],
 
-lastTopic:null
+    lessons: [],
+
+    paragraphs: [],
+
+    currentData: null,
+
+    lastTopic: null
 
 };
 
